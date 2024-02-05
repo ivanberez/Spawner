@@ -4,9 +4,10 @@ public class EnemySpawner : MonoBehaviour
 {
     private const float Delay = 2;
 
-    [SerializeField] private Enemy _enemy;
+    [SerializeField] private Enemy _prefabEnemy;
     
     private Vector2[] _directions;    
+
     private Vector2 RandomDirection => _directions[Random.Range(0, _directions.Length)];
 
     private void Awake()
@@ -19,11 +20,11 @@ public class EnemySpawner : MonoBehaviour
 
     private void Start()
     {
-        InvokeRepeating(nameof(GetEnemy), 0, Delay);
+        InvokeRepeating(nameof(Spawn), 0, Delay);
     }    
 
-    private void GetEnemy()
+    private void Spawn()
     {
-        Instantiate(_enemy, transform.position, Quaternion.identity).Init(RandomDirection);        
+        Instantiate(_prefabEnemy, transform.position, Quaternion.identity).Init(RandomDirection);        
     }    
 }
