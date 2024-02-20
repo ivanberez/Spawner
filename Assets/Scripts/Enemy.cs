@@ -3,23 +3,36 @@
 [RequireComponent(typeof(Movement))]
 [RequireComponent(typeof(Animator))]
 [RequireComponent(typeof(Collider2D))]
+[RequireComponent(typeof(SpriteRenderer))]
+
 public class Enemy : MonoBehaviour
-{    
+{
     private Movement _movement;
     private Animator _animator;
-    private AnimatorControl _animatorControl;
+    private SpriteRenderer _spriteRenderer;
+    private View _view;    
 
     private void Awake()
     {
         _movement = GetComponent<Movement>();
         _animator = GetComponent<Animator>();
+        _spriteRenderer = GetComponent<SpriteRenderer>();
 
-        _animatorControl = new AnimatorControl(_animator);
+        _view = new View(_spriteRenderer, _animator);
     }
 
-    public void Init(Vector2 direction)
+    public void Init(Way way)
     {
-        _movement.SetDirection(direction);
-        _animatorControl.ChangeParams(direction);
-    }       
+        _movement.SetWay(way);
+    }
+
+    private void OnEnable()
+    {
+        _movement.ChangedDirection += _view.RefreshByDirection;        
+    }
+
+    private void OnDisable()
+    {
+        _movement.ChangedDirection -= _view.RefreshByDirection;        
+    }    
 }
