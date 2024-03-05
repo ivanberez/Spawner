@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
 
     [SerializeField] private float _speed = 4;
     
-    private Way _way;
+    private Path _way;
     private int _curentWayPoint;
     private Vector3 _targetPosition;
     private Direction _direction;
@@ -66,7 +66,7 @@ public class Movement : MonoBehaviour
         }        
     }
 
-    public void SetWay(Way way)
+    public void SetWay(Path way)
     {
         _way = way;
         _curentWayPoint = StartWayPoint;

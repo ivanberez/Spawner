@@ -5,7 +5,7 @@ public class EnemySpawner : MonoBehaviour
     private const float Delay = 2;
 
     [SerializeField] private Enemy _prefabEnemy;
-    [SerializeField] private Way _way;             
+    [SerializeField] private Path _way;             
 
     private void Start()
     {

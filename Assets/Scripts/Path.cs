@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class Way : MonoBehaviour
+public class Path : MonoBehaviour
 {    
     [field: SerializeField] public Vector3[] Points { get; private set; }
 

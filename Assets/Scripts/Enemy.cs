@@ -21,7 +21,7 @@ public class Enemy : MonoBehaviour
         _view = new View(_spriteRenderer, _animator);
     }
 
-    public void Init(Way way)
+    public void Init(Path way)
     {
         _movement.SetWay(way);
     }
