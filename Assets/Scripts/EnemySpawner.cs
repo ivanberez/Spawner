@@ -1,19 +1,24 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
     private const float Delay = 2;
 
-    [SerializeField] private Enemy _prefabEnemy;
+    [SerializeField] private Enemy _prefab;
     [SerializeField] private Path _way;             
 
     private void Start()
     {
-        InvokeRepeating(nameof(Spawn), 0, Delay);        
+        StartCoroutine(Spawn());        
     }    
 
-    private void Spawn()
+    private IEnumerator Spawn()
     {
-        Instantiate(_prefabEnemy, transform.position, Quaternion.identity).Init(_way);        
-    }    
+        while(true)
+        {
+            Instantiate(_prefab, transform.position, Quaternion.identity).Init(_way);
+            yield return new WaitForSeconds(Delay);
+        }        
+    }
 }

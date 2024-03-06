@@ -1,7 +1,7 @@
+using System;
 using UnityEngine;
-using UnityEngine.Events;
 
-public class Movement : MonoBehaviour
+public class Mover : MonoBehaviour
 {
     private const int StartWayPoint = 0;
 
@@ -11,32 +11,32 @@ public class Movement : MonoBehaviour
     private int _curentWayPoint;
     private Vector3 _targetPosition;
     private Direction _direction;
-
-    private UnityEvent<Direction> _changedDirection = new UnityEvent<Direction>();
-
-    public event UnityAction<Direction> ChangedDirection
-    {
-        add => _changedDirection.AddListener(value);
-        remove => _changedDirection.RemoveListener(value);
-    }
-
-    private void Awake()
-    {
-        _targetPosition = transform.position;
-    }
+    
+    public event Action<Direction> ChangedDirection;        
 
     private void Update()
     {
-        CheckTargetPosition();
-        transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
-    }           
+        if(_way != null)
+        {
+            CheckTargetPosition();
+            transform.position = Vector3.MoveTowards(transform.position, _targetPosition, _speed * Time.deltaTime);
+        }        
+    }
+
+    public void SetWay(Path way)
+    {
+        _way = way;
+        _curentWayPoint = StartWayPoint;
+        SetTargetPosition(_way.GetPoints[_curentWayPoint]);
+        ChangedDirection?.Invoke(_direction);
+    }
 
     private void CheckTargetPosition()
-    {
+    {        
         if (transform.position == _targetPosition)
         {
-            _curentWayPoint = (_curentWayPoint + 1) % _way.Points.Length;
-            SetTargetPosition(_way.Points[_curentWayPoint]);            
+            _curentWayPoint = (_curentWayPoint + 1) % _way.GetPoints.Length;
+            SetTargetPosition(_way.GetPoints[_curentWayPoint]);            
         }
     }
 
@@ -47,7 +47,7 @@ public class Movement : MonoBehaviour
         var targetDirection = DefineDirection(newPosition);
 
         if(_direction != targetDirection)
-            _changedDirection.Invoke(_direction = targetDirection);
+            ChangedDirection?.Invoke(_direction = targetDirection);
     }
 
     private Direction DefineDirection(Vector3 position)
@@ -64,13 +64,5 @@ public class Movement : MonoBehaviour
         {
             return vectorDirecion.y > 0 ? Direction.Down : Direction.Up;
         }        
-    }
-
-    public void SetWay(Path way)
-    {
-        _way = way;
-        _curentWayPoint = StartWayPoint;
-        SetTargetPosition(_way.Points[_curentWayPoint]);
-        _changedDirection.Invoke(_direction);
-    }
+    }    
 }

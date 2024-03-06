@@ -1,20 +1,18 @@
 ﻿using UnityEngine;
 
-[RequireComponent(typeof(Movement))]
-[RequireComponent(typeof(Animator))]
-[RequireComponent(typeof(Collider2D))]
-[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(Mover), typeof(Animator))]
+[RequireComponent(typeof(SpriteRenderer), typeof(Collider2D))]
 
 public class Enemy : MonoBehaviour
 {
-    private Movement _movement;
+    private Mover _movement;
     private Animator _animator;
     private SpriteRenderer _spriteRenderer;
     private View _view;    
 
     private void Awake()
     {
-        _movement = GetComponent<Movement>();
+        _movement = GetComponent<Mover>();
         _animator = GetComponent<Animator>();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 
@@ -28,7 +26,7 @@ public class Enemy : MonoBehaviour
 
     private void OnEnable()
     {
-        _movement.ChangedDirection += _view.RefreshByDirection;        
+        _movement.ChangedDirection += _view.RefreshByDirection;            
     }
 
     private void OnDisable()

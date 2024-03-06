@@ -2,14 +2,16 @@ using System;
 using UnityEngine;
 
 public class Path : MonoBehaviour
-{    
-    [field: SerializeField] public Vector3[] Points { get; private set; }
+{
+    private Vector3[] _points;
+
+    public Vector3[] GetPoints => (Vector3[])_points.Clone();
 
     private void Awake()
     {
-        if (Points == null)
+        if (_points == null || _points.Length == 0)
         {
-            Points = new Vector3[] 
+            _points = new Vector3[] 
             {
                 transform.position 
             };
@@ -19,13 +21,13 @@ public class Path : MonoBehaviour
     [ContextMenu("Refresh Points")]
     private void OnValidate()
     {
-        Transform[] childrensTransform = GetComponentsInChildren<Transform>();        
+        Transform[] childrensTransform = GetComponentsInChildren<Transform>();
 
         var length = childrensTransform.Length - 1;
 
-        Points = new Vector3[length];
+        _points = new Vector3[length];
 
         for (int i = 0; i < length; i++)
-            Points[i] = childrensTransform[i + 1].position;
-    }
+            _points[i] = childrensTransform[i + 1].position;
+    }    
 }

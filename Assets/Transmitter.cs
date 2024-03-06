@@ -6,7 +6,7 @@ public class Transmitter : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.TryGetComponent(out Movement movement))
+        if(collision.TryGetComponent(out Mover movement))
         {
             movement.SetWay(_path);            
         }

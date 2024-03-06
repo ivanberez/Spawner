@@ -19179,6 +19179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400008}
+  - component: {fileID: 7296404021561839038}
   m_Layer: 0
   m_Name: Explode8
   m_TagString: Untagged
@@ -19205,3 +19206,15 @@ Transform:
   - {fileID: 400000}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7296404021561839038
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 100008}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7b4b53ad02b18f445aca2757934d9fe7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
