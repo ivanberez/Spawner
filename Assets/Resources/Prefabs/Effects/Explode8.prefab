@@ -19179,7 +19179,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 400008}
-  - component: {fileID: 7296404021561839038}
+  - component: {fileID: -597992858096498943}
   m_Layer: 0
   m_Name: Explode8
   m_TagString: Untagged
@@ -19206,7 +19206,7 @@ Transform:
   - {fileID: 400000}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7296404021561839038
+--- !u!114 &-597992858096498943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

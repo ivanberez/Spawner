@@ -1,11 +1,10 @@
-using System;
 using UnityEngine;
 
 public class Path : MonoBehaviour
 {
     private Vector3[] _points;
 
-    public Vector3[] GetPoints => (Vector3[])_points.Clone();
+    public Vector3[] Points => (Vector3[])_points.Clone();
 
     private void Awake()
     {
@@ -29,5 +28,5 @@ public class Path : MonoBehaviour
 
         for (int i = 0; i < length; i++)
             _points[i] = childrensTransform[i + 1].position;
-    }    
+    }  
 }
